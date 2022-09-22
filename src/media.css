@@ -1,0 +1,35 @@
+/* Mobile responsive
+@media screen (max-width:500px) and (min-width:300px){
+
+    div{
+        position:absolute;
+        display:flex
+    }
+
+    className = {condition ? "class1": "class2"}
+}
+
+
+const[usercount,setUserCount] = useState(0);
+
+useEffect(()=>{
+    console.lgo('fff')
+},[usercount])
+
+
+const  handleClick = ()=>{
+    setUserCount(c =>c +1)
+} 
+
+
+return(
+    <>
+    {
+        usercount
+    }
+
+    <button onClick={handleClick}>
+        add
+    </button>
+    </>
+) */
