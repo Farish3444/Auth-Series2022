@@ -12,7 +12,8 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const from = location.state?.from?.pathname || "/"
+    // const from = location.state?.from?.pathname || "/"
+    const from = '/linkpage'
 
     const userRef = useRef();
     const errRef = useRef();
@@ -34,7 +35,26 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        
+        // const roles = response?.data.roles;
+        // const accessToken = response?.data?.accessToken
+        // const response= axios.post(LOGIN_URL,JSON.stringify({user,pwd}),{headers:{'Content-Type':'application/json'},withCredentials:true}).then(
+        //     (res)=>{
+        //         if(res['status']==200){
+        //             setAuth({user,pwd,roles,accessToken})
+        //             setuser('')
+        //             setPwd('')
+        //             navigate(from,{replace:true})
+        //         }
+        //     }
+        // ).catch(){
+        //     console.log('error')
+        // }
+
+        // }
+
         try{
+            
             const response = axios.post(
                 LOGIN_URL,
                 JSON.stringify({user,pwd}),
@@ -51,13 +71,14 @@ const Login = () => {
             // setSuccess(true)
             navigate(from,{replace:true});
         }catch(err){
+            console.log('catch coming')
             if(!err?.response){
                 setErrorMsg('No server Response') 
             }
-            else if(err.response?.status === 400){
+            else if(err.response?.status == 400){
                 setErrorMsg('Missing Username or Password')
             }
-            else if(err.response?.status ===401){
+            else if(err.response?.status == 401){
                 setErrorMsg('Unauthorized')
             } else{
                 setErrorMsg('Login Failed')
