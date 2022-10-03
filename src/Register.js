@@ -98,7 +98,7 @@ const Register = () => {
                 <section>
                     <h1>Success!</h1>
                     <p>
-                        <a href="#">Sign In</a>
+                        <a onClick={()=>navigate("/login")}>Sign In</a>
                     </p>
                 </section>
             ) : (
