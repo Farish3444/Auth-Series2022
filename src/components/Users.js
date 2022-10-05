@@ -1,7 +1,8 @@
 import React,{useState,useEffect} from 'react';
 import { useNavigate,useLocation } from 'react-router-dom';
-import axios from '../api/axios';
 import UseRefreshToken from '../hooks/useRefreshToken';
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
+
 
 
 const Users = () => {
@@ -10,6 +11,7 @@ const Users = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const refresh = UseRefreshToken();
+    const axiosPrivate = useAxiosPrivate()
 
     useEffect(()=>{
 
@@ -19,13 +21,14 @@ const Users = () => {
         const getUser = async() =>{
 
             try{
-                const response = await axios.get('/user',{
+                const response = await axiosPrivate.get('/user',{
                     signal:controller.signal
                 });
                 console.log(response.data)   
                 isMounted && setUsers(response.data);     
             }catch(err){
                 console.log(err)
+                navigate('/login',{state:{from:location},replace:true});
             }
         }
 
