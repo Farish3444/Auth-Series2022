@@ -11,6 +11,7 @@ import Admin from './components/Admin';
 import Editor from './components/Editor';
 import Lounge from './components/Lounge';
 import RequireAuth from './components/RequireAuth';
+import PersistLogin from './components/PersistLogin';
 
 
 function App() {
@@ -32,7 +33,8 @@ function App() {
         <Route path="unauthorized" element={<Unauthorized />} />
 
         {/* PROTECTED ROUTES */}
-    <Route element={<RequireAuth  alllowedRoles={[ROLES.User]} />}>   
+<Route element={<PersistLogin />}>
+    <Route element={<RequireAuth alllowedRoles={[ROLES.User,ROLES.Editor,ROLES.Admin]} />}>   
         <Route path="/" element={<Home />} />       
     </Route>      
 
@@ -44,7 +46,10 @@ function App() {
         <Route path="admin" element={<Admin />} />   
       </Route>
 
-        <Route path="lounge" element={<Lounge />} />    
+    <Route element={<RequireAuth alllowedRoles={[ROLES.Admin]} />}>
+    <Route path="lounge" element={<Lounge />} />    
+    </Route>  
+</Route>
 
         <Route path='*'  element={<Missing />} />
 

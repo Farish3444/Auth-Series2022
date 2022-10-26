@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Admin = () => {
   return (
     <div>
-        <h1>Admin Page</h1>
+        <h1 style={{color:'black'}}>Admin Page</h1>
         <br />
         <Users />
         <div className='flexGrow'>

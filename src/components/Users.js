@@ -28,30 +28,34 @@ const Users = () => {
                 isMounted && setUsers(response.data);     
             }catch(err){
                 console.log(err)
-                navigate('/login',{state:{from:location},replace:true});
+                navigate('/login',{ state:{from:location},replace:true});
             }
         }
 
         getUser();
 
-        return()=>{
+        return ()=>{
             isMounted = false;
             controller.abort();
         }
-
     },[])
 
   return (
     <article>
         <h1>users List</h1>
-        { users?.length ?
-           ( users.map((user,i)=> <li key={i}>
-                {user?.username}
-            </li>)): <p>No Users To Display</p>
+        {
+            users?.length ? (
+                <ul>
+                {
+                    users.map((m,i)=>
+                        <li key={i}>
+                            {m.username}
+                        </li>
+                    )
+                }
+                </ul>
+            ) : (<p>No Users to Display</p>)
         }
-        <button
-        onClick={()=>refresh()}
-        >Refresh</button>
     </article>
   );
 }

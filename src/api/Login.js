@@ -35,12 +35,14 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
             const response = await axios.post(LOGIN_URL,
                 JSON.stringify({ user, pwd }),
                 {
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json',
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+                },
                     withCredentials: true
                 }
             );
@@ -67,13 +69,12 @@ const Login = () => {
     }
 
     return (
-
         <section>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
             <h1>Sign In</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="username">Username:</label>
-                <input
+                <input  
                     type="text"
                     id="username"
                     ref={userRef}
